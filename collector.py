@@ -18,6 +18,10 @@ PORT_STATS_NAMES = [
     'outMulticastPkts',
     'outOctets',
     'outUcastPkts',
+    'inBitsRate',
+    'inPktsRate',
+    'outBitsRate',
+    'outPktsRate',
 ]
 
 
@@ -168,6 +172,7 @@ class AristaMetricsCollector(object):
                 try:
                     iface = self._interfaces[interface]
                     data = iface['interfaceCounters']
+                    data.update(iface['interfaceStatistics'])
                 except KeyError:
                     logging.debug((
                                    f'Interface {interface} on {self._target}'
